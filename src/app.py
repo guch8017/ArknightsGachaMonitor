@@ -2,6 +2,7 @@
 from flask import Flask
 import json
 import random
+import os
 from copy import deepcopy
 from time import time
 
@@ -37,7 +38,8 @@ save = 0  # 保底统计
 def db_init():
     global listR, listCount
     print('HelloWorld')
-    with open('''/''', 'r') as infile:
+    print os.path.abspath('../constData')
+    with open(os.path.abspath('../constData') + '/character_table.json', 'r') as infile:
         js = json.loads(infile.read())
 
         for (key, value) in js.items():
@@ -147,7 +149,7 @@ def syncGacha():
 
 @app.route('/account/syncData', methods=['POST', 'GET'])
 def syncData():
-    with open('''syncData.json''', 'r') as sync_data_json:
+    with open(os.path.abspath('../constData') + '/syncData.json', 'r') as sync_data_json:
         return sync_data_json.read()
 
 
