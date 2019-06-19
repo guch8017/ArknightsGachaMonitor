@@ -20,10 +20,10 @@ python app.py
 安装Charles SSL证书并确定能成功解码手机/模拟器的https数据后，进行下列操作：
 * 选中 Tools - Map Remote （macOS快捷键 option+command+M）
 * 点击Add，添加一条转发规则，如下图填写参数
-![map.png](https://github.com/guch8017/ArknightsGachaMonitor/images/map.png)
+![map.png](https://github.com/guch8017/ArknightsGachaMonitor/raw/master/images/map.png)
 抽卡前需确保合成玉数量>=6000。否则请进行以下操作修改本地的合成玉数量。
 * 再次点击Add，添加以下规则。
-![syncData.png](https://github.com/guch8017/ArknightsGachaMonitor/images/syncData.png)
+![syncData.png](https://github.com/guch8017/ArknightsGachaMonitor/raw/master/images/syncData.png)
 最后确保将Enable Map Remote开关选中，重新登陆游戏即可。
 
 ## Bugs&Todos
