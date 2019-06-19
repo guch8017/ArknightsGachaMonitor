@@ -45,6 +45,8 @@ def db_init():
         for (key, value) in js.items():
             rarity = value["rarity"]
             if rarity > 1:
+                if key.startswith('token'):
+                    continue
                 listR[rarity - 2].append(key)
                 listCount[rarity - 2].append(0)
 
@@ -155,7 +157,7 @@ def syncData():
 
 @app.route('/showDb')
 def print_db():
-    return json.dumps(listR)
+    return json.dumps(listR) + 'Total {}'.format(len(listR[3]))
 
 
 @app.route('/gacha/tenAdvanceGacha', methods=['POST', 'GET'])
