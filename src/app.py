@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 # 常量部分
 startAdd = 50  # 保底数量(修改为0时无保底)
-percentageSSSR = 100  # 六星概率
+percentageSSSR = 2  # 六星概率
 percentageSSSRAdd = 2  # 保底概率增加
 percentageSSR = 8  # 五星概率
 percentageSR = 50  # 四星概率
@@ -160,7 +160,7 @@ def print_db():
     return json.dumps(listR) + 'Total {}'.format(len(listR[3]))
 
 
-@app.route('/gacha/tenAdvanceGacha', methods=['POST', 'GET'])
+@app.route('/gacha/tenAdvancedGacha', methods=['POST', 'GET'])
 def gacha():
     return json.dumps(generateData(gachaGetList()))
 
