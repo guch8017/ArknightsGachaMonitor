@@ -145,6 +145,12 @@ def syncGacha():
     })
 
 
+@app.route('/account/syncData', methods=['POST', 'GET'])
+def syncData():
+    with open('''syncData.json''', 'r') as sync_data_json:
+        return sync_data_json.read()
+
+
 @app.route('/showDb')
 def print_db():
     return json.dumps(listR)
