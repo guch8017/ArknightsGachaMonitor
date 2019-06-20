@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="41acd7b0-e365-4c9d-bd96-ab0388245cef" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,14 +60,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="md" value="83" />
-          <entry key="py" value="172" />
+          <entry key="md" value="363" />
+          <entry key="py" value="918" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Markdown" value="83" />
-          <entry key="Python" value="172" />
+          <entry key="Markdown" value="363" />
+          <entry key="Python" value="918" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -90,8 +91,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+            <state relative-caret-position="300">
+              <caret line="20" column="49" lean-forward="true" selection-start-line="15" selection-end-line="20" selection-end-column="49" />
               <folding>
                 <element signature="e#24#47#0" expanded="true" />
               </folding>
@@ -103,8 +104,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="555">
-                <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
+              <first_editor relative-caret-position="422">
+                <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
               </first_editor>
               <second_editor />
             </state>
@@ -170,6 +171,11 @@
               <item name="ArknightsGachaMonitor" type="b2602c69:ProjectViewProjectNode" />
               <item name="ArknightsGachaMonitor" type="462c0819:PsiDirectoryNode" />
               <item name="constData" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ArknightsGachaMonitor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ArknightsGachaMonitor" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -292,16 +298,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/constData/character_table.json">
+    <entry file="file://$PROJECT_DIR$/constData/syncData.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/constData/syncData.json">
+    <entry file="file://$PROJECT_DIR$/constData/character_table.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+        <state relative-caret-position="300">
+          <caret line="20" column="49" lean-forward="true" selection-start-line="15" selection-end-line="20" selection-end-column="49" />
           <folding>
             <element signature="e#24#47#0" expanded="true" />
           </folding>
@@ -311,8 +317,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="555">
-            <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
+          <first_editor relative-caret-position="422">
+            <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
           </first_editor>
           <second_editor />
         </state>

@@ -27,6 +27,30 @@ python app.py
 ![syncData.png](https://github.com/guch8017/ArknightsGachaMonitor/raw/master/images/syncData.png)
 最后确保将Enable Map Remote开关选中，重新登陆游戏即可。
 
+### 指定抽取概率
+通过notepad++，sublime text或类似软件打开python文件，将常量部分下
+```python
+startAdd = 50  # 保底数量(修改为0时无保底)
+percentageSSSR = 2  # 六星概率
+percentageSSSRAdd = 2  # 保底概率增加
+percentageSSR = 8  # 五星概率
+percentageSR = 50  # 四星概率
+chanceUp = [[], [], [], []]  # 特殊UP活动,分别对应3、4、5、6
+```
+分别按注释改为需要的值。UP出率默认为占同星级中的50%
+
+### 指定抽取列表
+通过notepad++，sublime text或类似软件打开python文件，将常量部分下
+```python
+selfDefined = False
+selfDefinedList = []
+```
+改为
+```python
+selfDefined = True
+selfDefinedList = ['charid']
+```
+注意：charid为角色ID，具体对应可启动程序后通过浏览器访问['http://127.0.0.1:5000/showDb](http://127.0.0.1:5000/showDb)页面查看，一定要填满十个ID否则程序将出错。
 ## 样例
 以下是模拟全六星的截图
 ![example1](https://github.com/guch8017/ArknightsGachaMonitor/raw/master/images/example1.png)
@@ -37,12 +61,16 @@ python app.py
 ~~部分角色皮肤出现问题，已知原因为部分角色皮肤非常规命名（干员名#1），待修复。~~ 
 
 修正偶尔出现空白人物的bug。确认到为部分召唤物与人物数据共同存储导致问题，已修复。
+### 0.0.2
+~~计划添加指定抽取人物功能，你也可以去豹跳了（误）。~~
+
+已经添加指定出货列表
 
 ## Bugs&Todos
-1. 计划添加指定抽取人物功能，你也可以去豹跳了（误）。
-2. 信物获取数据暂未添加，故不会出现信物/黄票获取界面。
-3. 添加抽取统计，是欧是非一看便知。
-4. 貌似可以抽出暴行，阿米娅。。。
+
+1. 信物获取数据暂未添加，故不会出现信物/黄票获取界面。
+2. 添加抽取统计，是欧是非一看便知。
+3. 貌似可以抽出暴行，阿米娅。。。
 
 ## 感谢
 角色数据来源：[ArknightsGameData](https://github.com/Perfare/ArknightsGameData)

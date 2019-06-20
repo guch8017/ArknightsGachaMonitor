@@ -5,6 +5,10 @@ import random
 import os
 from copy import deepcopy
 from time import time
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 app = Flask(__name__)
 
@@ -15,6 +19,8 @@ percentageSSSRAdd = 2  # 保底概率增加
 percentageSSR = 8  # 五星概率
 percentageSR = 50  # 四星概率
 chanceUp = [[], [], [], []]  # 特殊UP活动,分别对应3、4、5、6
+selfDefined = True  # 自定义抽卡数据，当此项设为True时随机抽卡功能无效
+selfDefinedList = []  # 自定义抽卡数据，填入干员ID，不知道的可访问127.0.0.1:5000/showDb查看。一定要填满十个！
 
 # 传输格式常量
 dataResponse = {"gachaResultList": [], "playerDataDelta": {}}
@@ -30,6 +36,7 @@ troopChar = {"instId": -1, "charId": "", "favorPoint": 0, "potentialRank": 0, "m
 
 # 统计用变量
 listR = [[], [], [], []]  # 干员列表
+listName = [[], [], [], []]  # 干员名
 listCount = [[], [], [], []]  # 抽取数量统计
 total = 0  # 总抽取数量
 save = 0  # 保底统计
@@ -37,18 +44,18 @@ save = 0  # 保底统计
 
 def db_init():
     global listR, listCount
-    print('HelloWorld')
-    print os.path.abspath('../constData')
+    print '[I] 从' + os.path.abspath('../constData') + '读取数据表。'
     with open(os.path.abspath('../constData') + '/character_table.json', 'r') as infile:
         js = json.loads(infile.read())
-
         for (key, value) in js.items():
             rarity = value["rarity"]
             if rarity > 1:
                 if key.startswith('token'):
                     continue
                 listR[rarity - 2].append(key)
+                listName[rarity - 2].append(value['name'])
                 listCount[rarity - 2].append(0)
+    print('Database Inited')
 
 
 def getChance():
@@ -100,11 +107,17 @@ def gachaGetList():
 
 
 def dataTest():
+    if selfDefined and len(selfDefinedList) != 10:
+        print('[E] 检测到启用了自定义列表但列表中干员数目有误。')
+        return False
     if startAdd < 0:
+        print('[E] 检测到保底起始数目有误。')
         return False
     if percentageSSSR < 0 or percentageSSSR > 100:
+        print('[E] 检测到概率超出范围。')
         return False
     if percentageSSSRAdd < 0:
+        print('[E] 检测到保底概率超出范围。')
         return False
     return True
 
@@ -157,12 +170,34 @@ def syncData():
 
 @app.route('/showDb')
 def print_db():
-    return json.dumps(listR) + 'Total {}'.format(len(listR[3]))
+    output = '''<!DOCTYPE html>
+    <html>
+    <head> 
+    <meta charset="utf-8" /> 
+    <title>干员列表</title> 
+    </head> 
+    <body> 
+    
+    '''
+    rare_list = ['三星', '四星', '五星', '六星']
+    for i in range(4):
+        output += ('<center style="font-size:18px;color:#FF0000">' + rare_list[i] + '</center>\n<center>')
+        for j in range(len(listR[i])):
+            output += (listName[i][j] + ' : ' + listR[i][j] + '<br/>')
+        output += '</center>'
+    output += '''
+    </body>
+    </html>
+    '''
+    return output
 
 
 @app.route('/gacha/tenAdvancedGacha', methods=['POST', 'GET'])
 def gacha():
-    return json.dumps(generateData(gachaGetList()))
+    if selfDefined:
+        return json.dumps(generateData(selfDefinedList))
+    else:
+        return json.dumps(generateData(gachaGetList()))
 
 
 db_init()
