@@ -20,7 +20,9 @@ percentageSSR = 8  # 五星概率
 percentageSR = 50  # 四星概率
 chanceUp = [[], [], [], []]  # 特殊UP活动,分别对应3、4、5、6
 selfDefined = False  # 自定义抽卡数据，当此项设为True时随机抽卡功能无效
-selfDefinedList = ['char_108_silent','char_150_snakek','char_128_plosis','char_134_ifrit','char_124_kroos','char_202_demkni','char_128_plosis','char_124_kroos','char_117_myrrh','char_242_otter']  # 自定义抽卡数据，填入干员ID，不知道的可访问127.0.0.1:5000/showDb查看。一定要填满十个！
+selfDefinedList = ['char_108_silent', 'char_150_snakek', 'char_128_plosis', 'char_134_ifrit', 'char_124_kroos',
+                   'char_202_demkni', 'char_128_plosis', 'char_124_kroos', 'char_117_myrrh',
+                   'char_242_otter']  # 自定义抽卡数据，填入干员ID，不知道的可访问127.0.0.1:5000/showDb查看。一定要填满十个！
 
 # 传输格式常量
 dataResponse = {"gachaResultList": [], "playerDataDelta": {}}
@@ -52,6 +54,9 @@ def db_init():
             rarity = value["rarity"]
             if rarity > 1:
                 if key.startswith('token'):  # 前缀检测，防止召唤物导致结果异常
+                    continue
+                if key.endwith('estell') or key.endwith('savage') or key.endwith('grani') or key.endwith(
+                        'tiger') or key.endwith('hpsts'):  # 后缀检测，去除公招限定
                     continue
                 listR[rarity - 2].append(key)
                 listName[rarity - 2].append(value['name'])
@@ -175,7 +180,7 @@ def verifyAccount():
     verify_data = json.loads(data.encode('utf-8'))
     uid = verify_data['uid']
     local_verify_data = deepcopy(verifyData)
-    local_verify_data.update({'uid':uid})
+    local_verify_data.update({'uid': uid})
     return json.dumps(local_verify_data)
 
 
