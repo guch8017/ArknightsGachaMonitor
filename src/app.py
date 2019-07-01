@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask
+from flask import Flask, request
 import json
 import random
 import os
@@ -19,8 +19,8 @@ percentageSSSRAdd = 2  # 保底概率增加
 percentageSSR = 8  # 五星概率
 percentageSR = 50  # 四星概率
 chanceUp = [[], [], [], []]  # 特殊UP活动,分别对应3、4、5、6
-selfDefined = True  # 自定义抽卡数据，当此项设为True时随机抽卡功能无效
-selfDefinedList = []  # 自定义抽卡数据，填入干员ID，不知道的可访问127.0.0.1:5000/showDb查看。一定要填满十个！
+selfDefined = False  # 自定义抽卡数据，当此项设为True时随机抽卡功能无效
+selfDefinedList = ['char_108_silent','char_150_snakek','char_128_plosis','char_134_ifrit','char_124_kroos','char_202_demkni','char_128_plosis','char_124_kroos','char_117_myrrh','char_242_otter']  # 自定义抽卡数据，填入干员ID，不知道的可访问127.0.0.1:5000/showDb查看。一定要填满十个！
 
 # 传输格式常量
 dataResponse = {"gachaResultList": [], "playerDataDelta": {}}
@@ -33,6 +33,7 @@ troop = {"chars": {}, "curCharInstId": -1}
 troopChar = {"instId": -1, "charId": "", "favorPoint": 0, "potentialRank": 0, "mainSkillLvl": 1,
              "skin": "char_290_vigna#1", "level": 1, "exp": 0, "evolvePhase": 0, "defaultSkillIndex": 0,
              "gainTime": -1, "skills": []}
+verifyData = {"uid": "-1", "channelUid": "-1", "isGuest": 0, "platform": 1}
 
 # 统计用变量
 listR = [[], [], [], []]  # 干员列表
@@ -50,7 +51,7 @@ def db_init():
         for (key, value) in js.items():
             rarity = value["rarity"]
             if rarity > 1:
-                if key.startswith('token'):
+                if key.startswith('token'):  # 前缀检测，防止召唤物导致结果异常
                     continue
                 listR[rarity - 2].append(key)
                 listName[rarity - 2].append(value['name'])
@@ -166,6 +167,16 @@ def syncGacha():
 def syncData():
     with open(os.path.abspath('../constData') + '/syncData.json', 'r') as sync_data_json:
         return sync_data_json.read()
+
+
+@app.route('/u8/user/verifyAccount', methods=['POST'])
+def verifyAccount():
+    data = request.get_data()
+    verify_data = json.loads(data.encode('utf-8'))
+    uid = verify_data['uid']
+    local_verify_data = deepcopy(verifyData)
+    local_verify_data.update({'uid':uid})
+    return json.dumps(local_verify_data)
 
 
 @app.route('/showDb')
